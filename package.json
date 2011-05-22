@@ -1,0 +1,20 @@
+{
+	"name": "deckmate",
+	"description": "Ender-based Javascript card game engine.",
+	"version": "0.0.1",
+	"homepage": "https://github.com/moresheth/deckmate",
+	"authors": ["Micah Nolte <@moresheth>"],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/moresheth/deckmate.git"
+	},
+	"keywords": ["javascript", "deck", "cards", "card", "playing", "game", "ender"],
+	"dependencies": {
+		"bean": "*",
+		"bonzo": "*",
+		"qwery": "*",
+		"valentine": "*"
+	},
+	"main": "./deckmate.js",
+	"ender": "./src/ender.js"
+}
