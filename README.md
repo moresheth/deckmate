@@ -9,6 +9,4 @@ To see how it's looking right now (before breaking it out into separate files), 
 <h3>Requirements</h3>
 
   * ender
-  * bean
-  * bonzo
-  * valentine
+  * jeesh
