@@ -41,28 +41,29 @@ function DeckMate(el) {
 		for ( var card in this.options.members ) {
 			htmlstr += '<div class="card ' + suit + ' ' + this.options.suits[suit] + ' ' + card + '">';
 			htmlstr += '<u>' + card.split('card')[1] + '</u><s>&' + suit + ';</s><u class="b">' + card.split('card')[1] + '</u><s class="b">&' + suit + ';</s>';
-			$.each( this.options.members[card], function(cl) {
-				htmlstr += '<b class="' + cl + '">&' + suit + ';</b>';
-			});
+			var l = this.options.members[card].length;
+			for (var i=0;i<l;i++) {
+				htmlstr += '<b class="' + this.options.members[card][i] + '">&' + suit + ';</b>';
+			}
 			htmlstr += '<i></i>';
 			htmlstr += '</div>';
 		}
 	}
 	$( deck ).html( htmlstr );
 	// Qwery
-	var cards = $('.card');
-
+	var cards = $('.card', deck);
 	var current = 0;
 
-	$.each( cards.elements.reverse(), function( card ) {
-		// Bonzo
-		$(card).css({
+	var revcards = cards.reverse();
+	var l = revcards.length;
+	for (var i=0;i<l;i++) {
+		$( revcards[i] ).css({
 			left: current + 'px',
 			top: current + 'px'
 		});
-		moveToFront( card );
+		moveToFront( revcards[i] );
 		current++;
-	});
+	}
 
 	$(document).bind( 'mousedown', doDown );
 	$(document).bind( 'mousemove', doMove );
@@ -80,8 +81,7 @@ function DeckMate(el) {
 
 	function moveToFront( card ) {
 		moveIt = false;
-		// Bonzo
-		$(card).appendTo( deck );
+		deck.appendChild( card );
 	}
 
 	function doDown(e) {
@@ -89,7 +89,7 @@ function DeckMate(el) {
 		if ( target.tagName.toLowerCase() == 'i' ) {
 			e.preventDefault();
 			$('#deck .selected').removeClass('selected');
-			$('.dragbox').remove();
+			$('.dragbox', deck).remove();
 			var card = target.parentNode;
 			dragged = card;
 			coords = getCoords(e);
@@ -98,11 +98,11 @@ function DeckMate(el) {
 		} else if ( target.id == 'table' ) {
 			e.preventDefault();
 			$('#deck .selected').removeClass('selected');
-			$('.dragbox').remove();
+			$('.dragbox', deck).remove();
 			coords = getCoords(e);
 			$(table).append('<div class="dragbox" style="top:' + coords.y + 'px;left:' + coords.x + 'px"></div>');
 			hasDragged = false;
-			dragbox = $('.dragbox')[0];
+			dragbox = $('.dragbox', deck)[0];
 		}
 	}
 
@@ -111,9 +111,8 @@ function DeckMate(el) {
 		dragged = false;
 		moveIt = false;
 		if (dragbox) {
-			
 			dragbox = false;
-			$('.dragbox').remove();
+			$('.dragbox', deck).remove();
 		}
 	}
 

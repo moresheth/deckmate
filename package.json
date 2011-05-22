@@ -10,10 +10,7 @@
 	},
 	"keywords": ["javascript", "deck", "cards", "card", "playing", "game", "ender"],
 	"dependencies": {
-		"bean": "*",
-		"bonzo": "*",
-		"qwery": "*",
-		"valentine": "*"
+		"jeesh": "*"
 	},
 	"main": "./deckmate.js",
 	"ender": "./src/ender.js"
